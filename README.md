@@ -57,7 +57,7 @@ Assign tickets
 Change ticket status
 Resolve tickets
 Add comments
-Authorization is enforced server-side. This prevents users from bypassing permissions by directly calling the GraphQL API.
+Authorization is enforced server side. This prevents users from bypassing permissions by directly calling the GraphQL API.
 
 4. Ticket Lifecycle
 Tickets support the following lifecycle:
@@ -86,7 +86,7 @@ Agents can then assign the ticket, update its status, add comments, and resolve 
 The frontend provides a dashboard where tickets can be searched and filtered.
 
 6. SLA Calculation
-The SLA engine is one of the main business-logic components of the application.
+The SLA engine is one of the main business logic components of the application.
 SLA deadlines are calculated using business minutes rather than normal elapsed time.
 The configured business hours are:
 09:00 – 18:00
@@ -97,8 +97,8 @@ Tickets created before business hours
 Tickets created after business hours
 Weekends
 Configured holidays
-Multi-day SLA calculations
-First-response deadlines
+Multi day SLA calculations
+First response deadlines
 Resolution deadlines
 The calculation moves the timestamp into the next valid business period whenever necessary and only counts valid business minutes.
 
@@ -187,13 +187,13 @@ This allows the frontend to provide appropriate feedback to users.
 13. Testing
 The backend contains both unit and integration tests.
 The tests cover important SLA and ticket scenarios including:
-Business-hour calculations
-Before-business-hours tickets
-After-business-hours tickets
+Business hour calculations
+Before business-hours tickets
+After business-hours tickets
 Weekend handling
 Holiday handling
 Weekend and holiday combinations
-Multi-day SLA calculations
+Multi day SLA calculations
 SLA state boundaries
 SLA breaches
 Completed SLA behavior
@@ -245,7 +245,7 @@ OPEN → IN_PROGRESS
 RESOLVED
       ↓
 CLOSED
-During this flow, the SLA information and first-response timestamp can also be verified.
+During this flow, the SLA information and first response timestamp can also be verified.
 
 16. Engineering Decisions
 I focused on keeping the implementation simple and maintainable instead of adding unnecessary infrastructure.
@@ -253,11 +253,11 @@ The main decisions were:
 Keep business rules on the server.
 Separate GraphQL resolvers from business logic.
 Use Prisma for structured database access.
-Use business-minute calculations for SLA handling.
-Use server-side role-based authorization.
+Use business minute calculations for SLA handling.
+Use server side role based authorization.
 Cover important edge cases with automated tests.
 Use Docker Compose for reproducible PostgreSQL development.
-Keep the frontend focused on the required ticket-management workflow.
+Keep the frontend focused on the required ticket management workflow.
 
 17. Tradeoffs and Future Improvements
 For the scope of the assignment, I avoided introducing additional infrastructure such as microservices, message queues, or external notification systems.
@@ -268,7 +268,7 @@ Audit/event history
 Email notifications
 Configurable business hours per organization
 More detailed reporting
-Additional end-to-end frontend tests
+Additional end to end frontend tests
 
 18. Conclusion
 The implementation focuses on the core requirements of the assignment while keeping the architecture understandable and maintainable.

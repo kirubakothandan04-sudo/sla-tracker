@@ -31,10 +31,13 @@
     "tsx": "^4.23.12"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/jsonwebtoken": "^9.0.6",
     "@types/luxon": "^3.4.2",
     "bun-types": "^1.4.0",
+    "eslint": "^10.9.1",
     "prisma": "^5.19.1",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.68.0"
   }
 }

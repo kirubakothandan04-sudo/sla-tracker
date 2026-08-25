@@ -25,6 +25,5 @@ const yoga = createYoga({
 const server = createServer(yoga);
 
 server.listen(PORT, () => {
-  // eslint-disable-next-line no-console
   console.log(`SLA Tracker API ready at http://localhost:${PORT}/graphql`);
 });

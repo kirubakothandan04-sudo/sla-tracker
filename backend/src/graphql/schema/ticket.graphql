@@ -1,0 +1,57 @@
+type SLAInfo {
+  firstResponseDueAt: String!
+  resolutionDueAt: String!
+  firstResponseState: SLAState!
+  resolutionState: SLAState!
+  firstResponseRemainingMinutes: Int!
+  resolutionRemainingMinutes: Int!
+}
+
+type Ticket {
+  id: ID!
+  title: String!
+  description: String!
+  priority: Priority!
+  status: TicketStatus!
+  reporter: User!
+  assignee: User
+  createdAt: String!
+  firstResponseAt: String
+  resolvedAt: String
+  sla: SLAInfo!
+  comments: [Comment!]!
+}
+
+type TicketConnection {
+  nodes: [Ticket!]!
+  pageInfo: PageInfo!
+}
+
+type TicketDashboard {
+  openTickets: Int!
+  inProgressTickets: Int!
+  atRiskTickets: Int!
+  breachedTickets: Int!
+}
+
+extend type Query {
+  tickets(
+    status: TicketStatus
+    priority: Priority
+    assigneeId: ID
+    slaState: SLAState
+    take: Int
+    cursor: String
+  ): TicketConnection!
+
+  ticket(id: ID!): Ticket
+
+  dashboard: TicketDashboard!
+}
+
+extend type Mutation {
+  createTicket(title: String!, description: String!, priority: Priority!): Ticket!
+  assignTicket(ticketId: ID!, assigneeId: ID!): Ticket!
+  changeTicketStatus(ticketId: ID!, status: TicketStatus!): Ticket!
+  resolveTicket(ticketId: ID!): Ticket!
+}

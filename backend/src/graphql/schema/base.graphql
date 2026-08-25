@@ -1,0 +1,37 @@
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+enum SLAState {
+  ON_TRACK
+  AT_RISK
+  BREACHED
+}
+
+enum UserRole {
+  REPORTER
+  AGENT
+}
+
+type PageInfo {
+  hasNextPage: Boolean!
+  endCursor: String
+}
+
+type Query {
+  _empty: String
+}
+
+type Mutation {
+  _empty: String
+}

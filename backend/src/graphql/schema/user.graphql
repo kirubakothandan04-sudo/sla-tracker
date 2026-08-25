@@ -1,0 +1,12 @@
+type User {
+  id: ID!
+  name: String!
+  email: String!
+  role: UserRole!
+  createdAt: String!
+}
+
+extend type Query {
+  users(role: UserRole): [User!]!
+  me: User
+}

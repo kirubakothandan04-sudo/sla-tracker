@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  REPORTER
+  AGENT
+}
+
+enum Priority {
+  LOW
+  MEDIUM
+  HIGH
+  URGENT
+}
+
+enum TicketStatus {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+}
+
+model User {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  role         UserRole
+  createdAt    DateTime @default(now())
+
+  ticketsReported  Ticket[]  @relation("ReportedTickets")
+  ticketsAssigned  Ticket[]  @relation("AssignedTickets")
+  comments         Comment[]
+
+  @@index([role])
+}
+
+model Ticket {
+  id               String       @id @default(cuid())
+  title            String
+  description      String
+  priority         Priority
+  status           TicketStatus @default(OPEN)
+
+  reporterId       String
+  reporter         User         @relation("ReportedTickets", fields: [reporterId], references: [id])
+
+  assigneeId       String?
+  assignee         User?        @relation("AssignedTickets", fields: [assigneeId], references: [id])
+
+  createdAt        DateTime     @default(now())
+  firstResponseAt  DateTime?
+  resolvedAt       DateTime?
+
+  comments         Comment[]
+
+  @@index([status])
+  @@index([priority])
+  @@index([assigneeId])
+  @@index([createdAt])
+}
+
+model Comment {
+  id        String   @id @default(cuid())
+  ticketId  String
+  ticket    Ticket   @relation(fields: [ticketId], references: [id])
+  authorId  String
+  author    User     @relation(fields: [authorId], references: [id])
+  content   String
+  createdAt DateTime @default(now())
+
+  @@index([ticketId])
+}
+
+model Holiday {
+  id   String   @id @default(cuid())
+  date DateTime @db.Date
+  name String
+
+  @@unique([date])
+}

@@ -16,6 +16,7 @@ React + TypeScript
 2. Architecture
 The application is divided into a backend and frontend.
 The backend follows a layered structure:
+
 React Frontend
       |
       | GraphQL
